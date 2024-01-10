@@ -10,11 +10,17 @@ const fileUpload = require('express-fileupload');
 const axios = require('axios');
 const mime = require('mime-types');
 
+// import 
+// const { addToGroup } = require('./addToGroup');
+// const { checkNumber } = require('./checkNumber');
+
+
 const port = process.env.PORT || 8000;
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
+app.use('/assets', express.static(__dirname + '/assets'));
 
 app.use(express.json());
 app.use(express.urlencoded({
@@ -76,6 +82,8 @@ client.on('message', msg => {
         msg.reply(replyMsg);
       }
     });
+  } else if(msg.body == 'tod') {
+    msg.reply('mamak kau kentod');
   }
 
   // NOTE!
@@ -152,6 +160,30 @@ io.on('connection', function(socket) {
     client.destroy();
     client.initialize();
   });
+
+  // cek validasi nomor whatsapp or not
+  socket.on('check-numbers', async (numbers) => {
+    const results = await Promise.all(numbers.map(async (number) => {
+        const isRegistered = await checkRegisteredNumber(phoneNumberFormatter(number));
+        return {
+            number: number,
+            isRegistered: isRegistered,
+        };
+    }));
+    // Emit event back to the client with the results
+    socket.emit('numbers-checked', results);
+  });
+
+  // add to group 
+  socket.on('add-to-group', async ({ groupId, numbers }) => {
+    try {
+        const result = await addToGroupWithDelay(groupId, numbers);
+        socket.emit('added-to-group', { message: result });
+    } catch (error) {
+        console.error('Error adding numbers to group:', error);
+        socket.emit('added-to-group', { message: ['Failed to add numbers to the group'] });
+    }
+  });
 });
 
 
@@ -160,6 +192,95 @@ const checkRegisteredNumber = async function(number) {
   return isRegistered;
 }
 
+// Function to add numbers to the group
+async function addToGroup(groupId, numbers) {
+  try {
+    // Initialize or use your existing WhatsApp client instance
+    // ...
+
+    // Find the group by ID
+    const group = await client.getChatById(groupId);
+
+    if (!group) {
+      return ['Group not found'];
+    }
+
+    const statusArray = [];
+
+    // Add each number to the group
+    for (const number of numbers) {
+      const formattedNumber = phoneNumberFormatter(number);
+      try {
+        await group.addParticipants([formattedNumber]);
+        statusArray.push(`Number ${formattedNumber} added to the group successfully`);
+      } catch (error) {
+        console.error(`Error adding number ${formattedNumber} to group:`, error);
+        statusArray.push(`Failed to add number ${formattedNumber} to the group`);
+      }
+    }
+
+    return statusArray;
+  } catch (error) {
+    console.error('Error adding numbers to group:', error);
+    return ['Failed to add numbers to the group'];
+  }
+}
+
+// Function to add numbers to the group with delay
+async function addToGroupWithDelay(groupId, numbers) {
+  try {
+      // Initialize or use your existing WhatsApp client instance
+      // ...
+
+      // Find the group by ID
+      const group = await client.getChatById(groupId);
+
+      if (!group) {
+          return ['Group not found'];
+      }
+
+      const statusArray = [];
+
+      for (let i = 0; i < numbers.length; i++) {
+          const numberToAdd = numbers[i];
+          const formattedNumber = phoneNumberFormatter(numberToAdd);
+
+          try {
+              await group.addParticipants([formattedNumber]);
+              statusArray.push(`Number ${formattedNumber} added to the group successfully`);
+          } catch (error) {
+              console.error(`Error adding number ${formattedNumber} to group:`, error);
+              statusArray.push(`Failed to add number ${formattedNumber} to the group`);
+          }
+
+          await sleep(10000); // Wait for 10 seconds
+      }
+
+      return statusArray;
+  } catch (error) {
+      console.error('Error adding numbers to group:', error);
+      return ['Failed to add numbers to the group'];
+  }
+}
+
+// Utility function to sleep for a specified duration (in milliseconds)
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ***********************API***********************//
 // Send message
 app.post('/send-message', [
   body('number').notEmpty(),

@@ -1,59 +1,299 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+
+<!-- Mirrored from rainbowit.net/html/histudy/14-home-elegant.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Sep 2023 16:41:17 GMT -->
 <head>
-	<title>Whatsapp API by Ngekoding</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- This parts is optional, just for improve the styles -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Montserrat', sans-serif;
-      padding: 20px;
-    }
-    #app {
-      max-width: 500px;
-      margin: 20px auto;
-    }
-    #qrcode {
-      display: none; /* Showed when qr code received */
-      width: 100%;
-      margin: 10px 0;
-      border: 1px solid #efefef;
-      border-radius: 4px;
-    }
-    ul.logs {
-      max-height: 150px;
-      padding: 15px 15px 15px 30px;
-      margin-top: 5px;
-      border-radius: 4px;
-      overflow-y: auto;
-      background: #efefef;
-      color: #666;
-      font-size: 14px;
-    }
-    ul.logs li:first-child {
-      color: green;
-    }
-  </style>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Bot Whatsapp API</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+
+    <!-- CSS
+	============================================ -->
+    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/vendor/slick.css">
+    <link rel="stylesheet" href="assets/css/vendor/slick-theme.css">
+    <link rel="stylesheet" href="assets/css/plugins/sal.css">
+    <link rel="stylesheet" href="assets/css/plugins/feather.css">
+    <link rel="stylesheet" href="assets/css/plugins/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/euclid-circulara.css">
+    <link rel="stylesheet" href="assets/css/plugins/swiper.css">
+    <link rel="stylesheet" href="assets/css/plugins/magnify.css">
+    <link rel="stylesheet" href="assets/css/plugins/odometer.css">
+    <link rel="stylesheet" href="assets/css/plugins/animation.css">
+    <link rel="stylesheet" href="assets/css/plugins/bootstrap-select.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/jquery-ui.css">
+    <link rel="stylesheet" href="assets/css/plugins/magnigy-popup.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/plyr.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        #qrcode {
+        display: none; /* Showed when qr code received */
+        width: 100%;
+        margin: 10px 0;
+        border: 1px solid #efefef;
+        border-radius: 4px;
+        }
+        ul.logs {
+        max-height: 150px;
+        padding: 15px 15px 15px 30px;
+        margin-top: 5px;
+        border-radius: 4px;
+        overflow-y: auto;
+        background: #efefef;
+        color: #666;
+        font-size: 14px;
+        }
+        ul.logs li:first-child {
+        color: green;
+        }
+    </style>
 </head>
-<body>
 
-	<div id="app">
-		<h1>Whatsapp API</h1>
-		<p>Regard FebriTahta Dev</p>
-		<img src="" alt="QR Code" id="qrcode">
-		<h3>Logs:</h3>
-		<ul class="logs"></ul>
-	</div>
+<body class="rbt-header-sticky">
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
+    <!-- Start Header Area -->
+    <header class="rbt-header rbt-header-default">
+        <div class="rbt-sticky-placeholder"></div>
+        <div class="rbt-header-wrapper  bg-color-white header-sticky">
+            <div class="container">
+                <div class="mainbar-row rbt-navigation-center align-items-center">
+                    <div class="header-left">
+                        <div class="logo">
+                            <a href="index.html">
+                                <img src="assets/bot.png" alt="Education Logo Images">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="rbt-main-navigation d-none d-xl-block">
+                        <nav class="mainmenu-nav">
+                            <ul class="mainmenu">
+                                <li>
+                                    <a href="">Home</a>
+                                </li>
+                                <li>
+                                    <a href="">Features</a>
+                                </li>
+                                <li>
+                                    <a href="">Pricelist</a>
+                                </li>
+                                <li class="has-dropdown has-menu-child-item">
+                                    <a href="#">About Us
+                                        <i class="feather-chevron-down"></i>
+                                    </a>
+                                    <ul class="submenu">
+                                        <li class="has-dropdown">
+                                            <a href="#">History</a>
+                                        </li>
+                                        <li class="has-dropdown">
+                                            <a href="#">Product</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <div class="header-right">
+                        <div class="rbt-btn-wrapper d-none d-xl-block">
+                            <a class="rbt-btn rbt-switch-btn btn-gradient btn-sm hover-transform-none" href="#">
+                                <span data-text="Join Now">Join Now</span>
+                            </a>
+                        </div>
+
+                        <!-- Start Mobile-Menu-Bar -->
+                        <div class="mobile-menu-bar d-block d-xl-none">
+                            <div class="hamberger">
+                                <button class="hamberger-button rbt-round-btn">
+                                    <i class="feather-menu"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Start Mobile-Menu-Bar -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </header>
+    <!-- Mobile Menu Section -->
+    <div class="popup-mobile-menu">
+        <div class="inner-wrapper">
+            <div class="inner-top">
+                <div class="content">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="assets/images/logo/logo.png" alt="Education Logo Images">
+                        </a>
+                    </div>
+                    <div class="rbt-btn-close">
+                        <button class="close-button rbt-round-btn"><i class="feather-x"></i></button>
+                    </div>
+                </div>
+                <p class="description">Histudy is a education website template. You can customize all.</p>
+                <ul class="navbar-top-left rbt-information-list justify-content-start">
+                    <li>
+                        <a href="mailto:hello@example.com"><i class="feather-mail"></i>example@gmail.com</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="feather-phone"></i>(302) 555-0107</a>
+                    </li>
+                </ul>
+            </div>
+
+            <nav class="mainmenu-nav">
+                <ul class="mainmenu">
+                    <li class="with-megamenu has-menu-child-item position-static">
+                        <a href="#">Home <i class="feather-chevron-down"></i></a>
+                      
+                    </li>
+
+                    <li class="with-megamenu has-menu-child-item">
+                        <a href="#">Courses <i class="feather-chevron-down"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Start Banner Area -->
+    <div class="rbt-banner-area rbt-banner-8 variation-02 with-shape" style="margin-bottom: 0;">
+        <div class="container">
+            <div class="row g-5 align-items-center" style="margin-bottom: 30px;">
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="content">
+                        <div class="inner text-center">
+                            <div class="rbt-new-badge rbt-new-badge-one">
+                                <span class="rbt-new-badge-icon">🏆</span> Bot Whatsapp Api 
+                            </div>
+                            <h1 class="title">Most Popular Request & Used.
+                                <br>
+                                <span class="header-caption">
+                                    <span class="cd-headline clip is-full-width">
+                                        <span class="cd-words-wrapper">
+                                            <b class="is-visible theme-gradient">Check Availability.</b>
+                                            <b class="is-hidden theme-gradient">Add Number To Group.</b>
+                                            <b class="is-hidden theme-gradient">API Send Message.</b>
+                                            <b class="is-hidden theme-gradient">API Broadcast Message.</b>
+                                            <b class="is-hidden theme-gradient">Auto Reply (dev).</b>
+                                            <b class="is-hidden theme-gradient">Multi Device (dev).</b>
+                                        </span>
+                                </span>
+                                </span>
+                            </h1>
+                            <p class="description has-medium-font-size mt--20">Keterbatasan kegunaan karena gap perbedaan ruang lingkup kepentingan, Hubungi developer..
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="shape-image">
+                <img src="assets/images/icons/tree-shape.svg" alt="Shape">
+            </div>
+            <div class="qr-wrapp" style="max-width: 500px; text-align: center; margin: 0 auto;">
+                <img src="" alt="QR Code" id="qrcode">
+            </div>
+            <div class="logs-wrapp" style="max-width: 500px; text-align: center; margin: 0 auto;">
+                <h3>Logs:</h3>
+                <ul class="logs"></ul>
+            </div>
+        </div>
+    </div>
+    <!-- End Banner Area -->
+
+    <div class="rbt-testimonial-area bg-color-white overflow-hidden" id="app" style="margin-top: 0;">
+        <div class="wrapper">
+            <div class="container">
+                <h5>Check Registered Number</h5>
+                <textarea name="" id="numbers" class="form-control" cols="30" rows="10"></textarea>
+                <button onclick="checkNumbers()">Validasi Nomor</button>
+                <div id="result"></div>
+            </div>
+            <div class="container">
+                <h3>Add number to group</h3>
+                <input type="text" id="groupId" placeholder="input group id">
+                <textarea id="numberWhatsapp" cols="65" rows="5" placeholder=" Masukkan nomor WhatsApp dipisahkan dengan enter"></textarea>
+                <button onclick="addToGroupWithDelay()">Add To Group</button>
+                <div id="status"></div>
+            </div>
+        </div>          
+    </div>
+
+    <div class="rbt-separator-mid">
+        <div class="container">
+            <hr class="rbt-separator m-0">
+        </div>
+    </div>
+    
+    <div class="rbt-separator-mid">
+        <div class="container">
+            <hr class="rbt-separator m-0">
+        </div>
+    </div>
+    <!-- Start Copyright Area  -->
+    <div class="copyright-area copyright-style-1 ptb--20">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12">
+                    <p class="rbt-link-hover text-center text-lg-start">MIT License (MIT) <a href="https://github.com/FebriTahta">Github : FebriTahta.</a> All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Copyright Area  -->
+    <div class="rbt-progress-parent">
+        <svg class="rbt-back-circle svg-inner" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div>
+
+    <!-- JS
+============================================ -->
+    <!-- Modernizer JS -->
+    <script src="assets/js/vendor/modernizr.min.js"></script>
+    <!-- jQuery JS -->
+    <script src="assets/js/vendor/jquery.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="assets/js/vendor/bootstrap.min.js"></script>
+    <!-- sal.js -->
+    <script src="assets/js/vendor/sal.js"></script>
+    <script src="assets/js/vendor/swiper.js"></script>
+    <script src="assets/js/vendor/magnify.min.js"></script>
+    <script src="assets/js/vendor/jquery-appear.js"></script>
+    <script src="assets/js/vendor/odometer.js"></script>
+    <script src="assets/js/vendor/backtotop.js"></script>
+    <script src="assets/js/vendor/isotop.js"></script>
+    <script src="assets/js/vendor/imageloaded.js"></script>
+
+    <script src="assets/js/vendor/wow.js"></script>
+    <script src="assets/js/vendor/waypoint.min.js"></script>
+    <script src="assets/js/vendor/easypie.js"></script>
+    <script src="assets/js/vendor/text-type.js"></script>
+    <script src="assets/js/vendor/jquery-one-page-nav.js"></script>
+    <script src="assets/js/vendor/bootstrap-select.min.js"></script>
+    <script src="assets/js/vendor/jquery-ui.js"></script>
+    <script src="assets/js/vendor/magnify-popup.min.js"></script>
+    <script src="assets/js/vendor/paralax-scroll.js"></script>
+    <script src="assets/js/vendor/paralax.min.js"></script>
+    <script src="assets/js/vendor/countdown.js"></script>
+    <script src="assets/js/vendor/plyr.js"></script>
+    <!-- Main JS -->
+    <!-- <script src="assets/js/main.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" crossorigin="anonymous"></script>
-	<script>
+    <script>
 		$(document).ready(function() {
 			var socket = io();
 
@@ -73,7 +313,100 @@
 			socket.on('authenticated', function(data) {
 				$('#qrcode').hide();
 			});
+      
 		});
+
+    const socket = io();
+
+    function checkNumbers() {
+        const numbersTextarea = document.getElementById('numbers');
+        const numbers = numbersTextarea.value.split('\n').filter(Boolean);
+
+        if (numbers.length === 0) {
+            alert('Please enter at least one WhatsApp number');
+            return;
+        }
+
+        // Emit event to server to check numbers
+        socket.emit('check-numbers', numbers);
+
+        // Handle server response
+        socket.on('numbers-checked', (result) => {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = ''; // Clear previous results
+
+            result.forEach((item) => {
+                const p = document.createElement('p');
+                p.textContent = `${item.number}: ${item.isRegistered ? 'Registered' : 'Not Registered'}`;
+                resultDiv.appendChild(p);
+            });
+        });
+    }
+
+    function addToGroup() {
+      const groupId = document.getElementById('groupId').value.trim();
+      const numbersTextarea = document.getElementById('numberWhatsapp');
+      const numbers = numbersTextarea.value.split('\n').filter(Boolean);
+
+      if (!groupId) {
+        alert('Group ID cannot be empty');
+        return;
+      }
+
+      if (numbers.length === 0) {
+        alert('Please enter at least one WhatsApp number');
+        return;
+      }
+
+      // Emit event to server to add numbers to the group
+      socket.emit('add-to-group', { groupId, numbers });
+
+      // Handle server response
+      socket.on('added-to-group', (result) => {
+        const statusDiv = document.getElementById('status');
+        statusDiv.textContent = result.message;
+      });
+    }
+
+    function addToGroupWithDelay() {
+        const groupId = document.getElementById('groupId').value.trim();
+        const numbersTextarea = document.getElementById('numberWhatsapp');
+        const numbers = numbersTextarea.value.split('\n').filter(Boolean);
+        const statusDiv = document.getElementById('status');
+
+        if (!groupId) {
+            alert('Group ID cannot be empty');
+            return;
+        }
+
+        if (numbers.length === 0) {
+            alert('Please enter at least one WhatsApp number');
+            return;
+        }
+
+        let index = 0;
+
+        // Handle server response only once outside the loop
+        socket.on('added-to-group', (result) => {
+            statusDiv.innerHTML += '<br>' + result.message.join('<br>'); // Join the array elements with line breaks
+        });
+
+        // Use setInterval to add numbers with a 10-second delay
+        const intervalId = setInterval(() => {
+            if (index < numbers.length) {
+                const numberToAdd = numbers[index];
+                socket.emit('add-to-group', { groupId, numbers: [numberToAdd] });
+                index++;
+            } else {
+                // Clear the interval when all numbers are added
+                clearInterval(intervalId);
+            }
+        }, 10000); // 10 seconds interval
+    }
+
 	</script>
 </body>
+
+
+<!-- Mirrored from rainbowit.net/html/histudy/14-home-elegant.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Sep 2023 16:41:22 GMT -->
 </html>
